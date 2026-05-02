@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Login | Tamss Assistant VIP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 40%, rgba(56, 189, 248, 0.2), transparent 70%);
+            pointer-events: none;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 460px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(14px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            padding: 2rem 1.8rem 1.8rem;
+            transition: transform 0.25s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-4px);
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-img {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(2px);
+            padding: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 25px;
+            display: block;
+        }
+
+        .brand h1 {
+            color: white;
+            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(120deg, #f0f9ff, #bae6fd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-top: 0.2rem;
+        }
+
+        .brand p {
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .input-group .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.15rem;
+            color: #cbd5e6;
+            transition: color 0.2s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .input-group input {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.9rem 1rem 0.9rem 2.8rem;
+            font-size: 1rem;
+            border-radius: 1.2rem;
+            color: white;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.25s;
+        }
+
+        .input-group input:focus {
+            border-color: #38bdf8;
+            background: rgba(15, 23, 42, 0.85);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+
+        .input-group input::placeholder {
+            color: #6f7c91;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-wrapper input {
+            padding-right: 3rem;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: color 0.2s;
+            z-index: 3;
+        }
+
+        .toggle-password:hover {
+            color: #38bdf8;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: flex-end;
+            margin: 0.2rem 0 1.25rem;
+        }
+
+        .forgot-link {
+            color: #a0afc3;
+            font-size: 0.85rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .forgot-link:hover {
+            color: #38bdf8;
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(95deg, #2dd4bf, #38bdf8);
+            border: none;
+            padding: 0.9rem;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #0f172a;
+            border-radius: 1.5rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-btn:hover {
+            transform: scale(1.01);
+            background: linear-gradient(95deg, #28bbaa, #2aa9e0);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message-area {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            min-height: 0;
+        }
+
+        .error-message {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.15);
+            padding: 0.7rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-left: 3px solid #f87171;
+            font-weight: 600;
+        }
+
+        /* POPUP ANIMASI */
+        .custom-wide-popup {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 0.75rem 2rem;
+            border-radius: 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border: 1px solid #38bdf8;
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            animation: slideUpFadeIn 0.3s ease forwards;
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @keyframes slideDownFadeOut {
+            from {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+        }
+
+        .input-group:focus-within .input-icon {
+            color: #7bc5ff !important;
+        }
+
+        @media (max-width: 520px) {
+            .login-container {
+                padding: 1.5rem 1.2rem 1.5rem;
+                max-width: 94%;
+            }
+            .brand h1 {
+                font-size: 1.7rem;
+            }
+            .logo-img {
+                width: 120px;
+                height: 120px;
+            }
+            .input-group input {
+                padding: 0.8rem 1rem 0.8rem 2.6rem;
+                font-size: 0.9rem;
+            }
+            .login-btn {
+                padding: 0.75rem;
+            }
+            .custom-wide-popup {
+                white-space: normal;
+                padding: 0.7rem 1.5rem;
+                font-size: 0.85rem;
+                max-width: 90%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .login-container {
+                padding: 1.2rem 1rem 1.2rem;
+            }
+            .logo-img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .login-container {
+            animation: fadeSlideUp 0.4s ease forwards;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="brand">
+        <div class="logo-img">
+            <img src="https://cdn.rulzzofficial.eu.cc/files/0/tamss_assist_1776953071071_lgyszl.jpg" alt="Logo" crossorigin="anonymous">
+        </div>
+        <h1>Selamat Datang</h1>
+        <p>masuk untuk mengelola script Tamss Assistant VIP anda</p>
+    </div>
+
+    <form id="loginForm">
+        <div class="input-group">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="username" name="username" placeholder="Username" autocomplete="off" required>
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-lock input-icon"></i>
+            <div class="password-wrapper">
+                <input type="password" id="password" name="password" placeholder="Kata Sandi" autocomplete="off" required>
+                <button type="button" class="toggle-password" id="togglePasswordBtn">
+                    <i class="fas fa-eye-slash" id="eyeIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="login-options">
+            <a href="#" class="forgot-link" id="forgotPasswordLink">Lupa password?</a>
+        </div>
+
+        <button type="submit" class="login-btn" id="loginButton">
+            <i class="fas fa-arrow-right-to-bracket"></i> Masuk Sekarang
+        </button>
+    </form>
+
+    <div class="message-area" id="messageArea"></div>
+</div>
+
+<script>
+    const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+    const passwordField = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+    const forgotLink = document.getElementById('forgotPasswordLink');
+    const loginForm = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
+    const messageArea = document.getElementById('messageArea');
+    const loginButton = document.getElementById('loginButton');
+
+    if (togglePasswordBtn && passwordField) {
+        togglePasswordBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            if (type === 'text') {
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            } else {
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            }
+        });
+        togglePasswordBtn.addEventListener('mousedown', (e) => e.preventDefault());
+    }
+
+    function showWidePopup(message) {
+        const existingPopup = document.querySelector('.custom-wide-popup');
+        if (existingPopup) existingPopup.remove();
+
+        const popup = document.createElement('div');
+        popup.className = 'custom-wide-popup';
+        popup.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 12px; white-space: nowrap;">
+                <i class="fas fa-headset" style="font-size: 1.1rem;"></i>
+                <span style="font-weight: 600; letter-spacing: 0.3px;">${message}</span>
+            </div>
+        `;
+        
+        document.body.appendChild(popup);
+        
+        setTimeout(() => {
+            if (popup && popup.parentNode) {
+                popup.style.animation = 'slideDownFadeOut 0.3s ease forwards';
+                setTimeout(() => {
+                    if (popup && popup.parentNode) popup.remove();
+                }, 300);
+            }
+        }, 3000);
+    }
+
+    if (forgotLink) {
+        forgotLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            showWidePopup("Silakan hubungi admin untuk reset password");
+        });
+    }
+
+    function displayErrorMessage(msg) {
+        messageArea.innerHTML = '';
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.innerHTML = `<i class="fas fa-circle-exclamation"></i> ${msg}`;
+        messageArea.appendChild(errorDiv);
+        setTimeout(() => {
+            if (messageArea.firstChild === errorDiv) {
+                errorDiv.style.opacity = '0';
+                errorDiv.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => {
+                    if (messageArea.firstChild === errorDiv) messageArea.innerHTML = '';
+                }, 300);
+            }
+        }, 5000);
+    }
+
+    function clearMessages() {
+        messageArea.innerHTML = '';
+    }
+
+    usernameInput.addEventListener('input', () => clearMessages());
+    passwordField.addEventListener('input', () => clearMessages());
+
+    async function performLogin(username, password) {
+        loginButton.disabled = true;
+        const originalBtnText = loginButton.innerHTML;
+        loginButton.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Memproses...`;
+        
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: username.trim(), password: password }),
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok && data.success === true) {
+                sessionStorage.setItem('user', JSON.stringify({
+                    username: data.username,
+                    role: data.role
+                }));
+                window.location.href = '/dashboard';
+            } else {
+                const errorMsg = data.message || 'Username atau password salah.';
+                displayErrorMessage(errorMsg);
+                passwordField.value = '';
+                passwordField.focus();
+                loginButton.disabled = false;
+                loginButton.innerHTML = originalBtnText;
+            }
+        } catch (err) {
+            displayErrorMessage('Tidak dapat terhubung ke server. Pastikan backend menyala.');
+            loginButton.disabled = false;
+            loginButton.innerHTML = originalBtnText;
+            passwordField.value = '';
+        }
+    }
+
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+        const username = usernameInput.value;
+        const password = passwordField.value;
+        
+        if (!username || username.trim() === '') {
+            displayErrorMessage('Username tidak boleh kosong.');
+            usernameInput.focus();
+            return;
+        }
+        if (!password || password === '') {
+            displayErrorMessage('Password tidak boleh kosong.');
+            passwordField.focus();
+            return;
+        }
+        
+        clearMessages();
+        await performLogin(username, password);
+    });
+</script>
+</body>
+</html>
